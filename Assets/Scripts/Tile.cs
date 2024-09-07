@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum TileType { Nothing, Land, Water, Boundaries }
+    public TileType tileType;
+    private TileType currentType;
+    [SerializeField] private Sprite landSprite;
+    [SerializeField] private Sprite waterSprite;
+    [SerializeField] private Sprite boundariesSprite;
+
+    private void Start()
     {
-        
+        currentType = tileType;
+        UpdateAppearance();
+
+        if (currentType == TileType.Nothing)
+            Debug.Log(gameObject.name + " set to nothing");
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>  Changes the tile type when selected  </summary>
+    public void SetTileType()
     {
-        
+        if (currentType == TileType.Land)
+            tileType = TileType.Water;
+        else if (currentType == TileType.Water)
+            tileType = TileType.Land;
+
+        currentType = tileType;
+        UpdateAppearance();
+    }
+
+    /// <summary>  Function that updates tile appearance based on tile type </summary> 
+    private void UpdateAppearance()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        switch (tileType)
+        {
+            case TileType.Land: spriteRenderer.sprite = landSprite; break;
+            case TileType.Water: spriteRenderer.sprite = waterSprite; break;
+            case TileType.Boundaries: spriteRenderer.sprite = boundariesSprite; break;
+            case TileType.Nothing: break;
+        }
     }
 }
