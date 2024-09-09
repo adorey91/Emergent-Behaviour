@@ -22,8 +22,13 @@ public class Fish : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) 
     {
         Debug.Log(other.gameObject.name);
-        if(other.gameObject.name == "GroundTile" || other.gameObject.name == "Ground_Land")
+        if(other.gameObject.name == "GroundTile" || other.gameObject.tag == "Ground")
+        {
+            Debug.Log("Changing Direction");
             ChangeDirection();
+        }
+            else
+            Debug.Log(other.gameObject.name + ", " + other.gameObject.tag);
     }
 
     private void ChangeDirection()

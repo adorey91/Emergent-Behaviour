@@ -39,8 +39,16 @@ public class Tile : MonoBehaviour
 
         switch (tileType)
         {
-            case TileType.Land: spriteRenderer.sprite = landSprite; break;
-            case TileType.Water: spriteRenderer.sprite = waterSprite; break;
+            case TileType.Land:
+                spriteRenderer.sprite = landSprite;
+                gameObject.tag = "Land";
+                gameObject.layer = LayerMask.NameToLayer("Land");
+                break;
+            case TileType.Water:
+                spriteRenderer.sprite = waterSprite;
+                gameObject.tag = "Water";
+                gameObject.layer = LayerMask.NameToLayer("Water");
+                break;
             case TileType.Boundaries: spriteRenderer.sprite = boundariesSprite; break;
             case TileType.Nothing: break;
         }
