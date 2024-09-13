@@ -366,3 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7f685e8af87fa49ac59db2ef607eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 3
+  landMat: {fileID: 0}
+  waterMat: {fileID: 0}

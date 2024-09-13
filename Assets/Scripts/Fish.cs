@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
@@ -14,9 +15,19 @@ public class Fish : MonoBehaviour
 
     private void Update()
     {
+        targetDirection.y=0;
         transform.position += targetDirection * swimmingSpeed * Time.deltaTime;
 
             
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Land" || collision.gameObject.tag == "Boundaries")
+        {
+            Debug.Log("Changing Direction");
+            ChangeDirection();
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D other) 
@@ -34,5 +45,6 @@ public class Fish : MonoBehaviour
     private void ChangeDirection()
     {
         targetDirection = Random.insideUnitCircle.normalized;
+        targetDirection.y=0;
     }
 }
