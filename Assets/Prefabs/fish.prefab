@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 6178017144873329010}
   - component: {fileID: 8171099338634647267}
   - component: {fileID: 8033707676024775485}
-  - component: {fileID: 1852511377742556611}
-  - component: {fileID: 8852439856747079672}
   - component: {fileID: 4064131969271895357}
+  - component: {fileID: 221894743226209526}
   m_Layer: 8
   m_Name: fish
   m_TagString: Fish
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,41 +122,6 @@ CircleCollider2D:
   m_Offset: {x: 0.005672395, y: 0.064665705}
   serializedVersion: 2
   m_Radius: 0.3230203
---- !u!114 &1852511377742556611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2612562727005048702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7748cca0f50656d44b804837dc14db80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swimmingSpeed: 2
---- !u!195 &8852439856747079672
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2612562727005048702}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!50 &4064131969271895357
 Rigidbody2D:
   serializedVersion: 4
@@ -185,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &221894743226209526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612562727005048702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd1b8a316fa40046bef6900f016172d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
