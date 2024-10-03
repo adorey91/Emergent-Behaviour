@@ -5,15 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behaviour/Steered Cohesion")]
 public class SteeredCohesionBehaviour : FilteredFlockBehaviour
 {
-    private Vector2 currentVelocity;
+    Vector2 currentVelocity;
     public float agentSmoothTime = 0.5f;
 
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
-        if (context.Count == 0) // if no neighbors, return no adjustments
+        //if no neighbors, return no adjustment
+        if (context.Count == 0)
             return Vector2.zero;
 
-        // add all points together and average
+        //add all points together and average
         Vector2 cohesionMove = Vector2.zero;
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
         foreach (Transform item in filteredContext)
@@ -22,7 +23,8 @@ public class SteeredCohesionBehaviour : FilteredFlockBehaviour
         }
         cohesionMove /= context.Count;
 
-        cohesionMove -= (Vector2)agent.transform.position; //create offset from agent position
+        //create offset from agent position
+        cohesionMove -= (Vector2)agent.transform.position;
         cohesionMove = Vector2.SmoothDamp(agent.transform.up, cohesionMove, ref currentVelocity, agentSmoothTime);
         return cohesionMove;
     }

@@ -11,7 +11,7 @@ public class CompositeBehaviourEditor : Editor
         //setup
         CompositeBehaviour cb = (CompositeBehaviour)target;
 
-        //check for behaviors
+        //check for behaviours
         if (cb.behaviours == null || cb.behaviours.Length == 0)
         {
             EditorGUILayout.BeginHorizontal();

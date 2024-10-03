@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Fish
       objectReference: {fileID: 0}
+    - target: {fileID: 2612562727005048702, guid: 6a1552984600dff469ed256842bfc675, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6178017144873329010, guid: 6a1552984600dff469ed256842bfc675, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

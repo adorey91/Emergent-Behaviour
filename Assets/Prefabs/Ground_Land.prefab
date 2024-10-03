@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3647521949976838545, guid: 6d7fe35ae8057174dbabfa10ce181430, type: 3}
+      propertyPath: sfxClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d9c4e249ccb3c834d86fd9837c1ee0fa, type: 3}
+    - target: {fileID: 3647521949976838545, guid: 6d7fe35ae8057174dbabfa10ce181430, type: 3}
       propertyPath: tileType
       value: 1
       objectReference: {fileID: 0}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputSystem.OnScreen.OnScreenStick;
 
 [CreateAssetMenu(menuName = "Flock/Behaviour/Composite")]
 public class CompositeBehaviour : FlockBehaviour
@@ -10,17 +11,17 @@ public class CompositeBehaviour : FlockBehaviour
 
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
-        // handle data mismatch
+        //handle data mismatch
         if (weights.Length != behaviours.Length)
         {
-            Debug.LogError("Data Mismatch in " + name, this);
+            Debug.LogError("Data mismatch in " + name, this);
             return Vector2.zero;
         }
 
-        // Set Up Move
+        //set up move
         Vector2 move = Vector2.zero;
 
-        // Iterate through behaviours
+        //iterate through behaviours
         for (int i = 0; i < behaviours.Length; i++)
         {
             Vector2 partialMove = behaviours[i].CalculateMove(agent, context, flock) * weights[i];
@@ -32,7 +33,6 @@ public class CompositeBehaviour : FlockBehaviour
                     partialMove.Normalize();
                     partialMove *= weights[i];
                 }
-
                 move += partialMove;
             }
         }

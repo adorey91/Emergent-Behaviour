@@ -14,9 +14,15 @@ public class Menu : MonoBehaviour
     public void EscapeState()
     {
         if (pauseMenu.activeSelf)
+        {
+            Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
+        }
         else
+        {
+            Time.timeScale = 0f;
             pauseMenu.SetActive(true);
+        }
     }
 
     public void QuitGame()
