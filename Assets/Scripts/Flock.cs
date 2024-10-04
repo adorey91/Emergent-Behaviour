@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Flock : MonoBehaviour
 {
     public FlockAgent fishPrefab;
-    public List<FlockAgent> fishes = new List<FlockAgent>();
+    public List<FlockAgent> allFish = new List<FlockAgent>();
     public FlockBehaviour behaviour;
     private int minSpawn = 10;
     private int maxSpawn = 100;
@@ -47,7 +47,7 @@ public class Flock : MonoBehaviour
 
     private void Update()
     {
-        foreach (FlockAgent agent in fishes)
+        foreach (FlockAgent agent in allFish)
         {
             List<Transform> context = GetNearbyObjects(agent);
             Vector2 move = behaviour.CalculateMove(agent, context, this);
@@ -76,6 +76,7 @@ public class Flock : MonoBehaviour
 
     public void SpawnFish(int count)
     {
+        int currentCount = allFish.Count;
         for (int i = 0; i < count; i++)
         {
             FlockAgent newFish = Instantiate(
@@ -84,32 +85,32 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform
                 );
-            newFish.name = "Fish " + fishes.Count + i;
+            
+            newFish.name = "Fish " + currentCount + i;
             newFish.Initialize(this);
-            fishes.Add(newFish);
+            allFish.Add(newFish);
         }
-
     }
 
     public void UpdateFishCount(int newCount)
     {
 
         // If we need to add more fish
-        if (newCount > fishes.Count)
+        if (newCount > allFish.Count)
         {
             sfxSource.PlayOneShot(sfxSplash);
-            int fishToSpawn = newCount - fishes.Count;
+            int fishToSpawn = newCount - allFish.Count;
             SpawnFish(fishToSpawn);
         }
         // If we need to remove fish
-        else if (newCount < fishes.Count)
+        else if (newCount < allFish.Count)
         {
             sfxSource.PlayOneShot(sfxYoink);
-            int fishToRemove = fishes.Count - newCount;
+            int fishToRemove = allFish.Count - newCount;
             for (int i = 0; i < fishToRemove; i++)
             {
-                FlockAgent agentToRemove = fishes[fishes.Count - 1]; // Remove from the end
-                fishes.Remove(agentToRemove);
+                FlockAgent agentToRemove = allFish[allFish.Count - 1]; // Remove from the end
+                allFish.Remove(agentToRemove);
                 Destroy(agentToRemove.gameObject);
             }
         }
