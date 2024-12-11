@@ -7,6 +7,7 @@ public class FlockAgent : MonoBehaviour
 {
     private Flock agentFlock;
     public Flock AgentFlock { get {  return agentFlock; } }
+    public LayerMask layerMask;
 
     private Collider2D agentCollider;
     public Collider2D AgentCollider { get { return agentCollider; } }

@@ -74860,14 +74860,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 1910467579894989641, guid: 0f7fbc295a7a72846999d94abb393a30, type: 3}
   agents: []
-  flockMask:
+  waterMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16
   behaviour: {fileID: 11400000, guid: 980f3461988d4c143a9ff79268ccf180, type: 2}
-  startingCount: 100
+  startingCount: 50
   driveFactor: 10
   maxSpeed: 5
-  neighborRadius: 1.5
+  neighborRadius: 2
   avoidanceRadiusMultiplier: 0.5
   flockSliderSpawn: {fileID: 1185449845}
 --- !u!4 &980568800
@@ -128632,14 +128632,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 1910467579894989641, guid: f0a62608f16c3094ca2dbc9e206ce016, type: 3}
   agents: []
-  flockMask:
+  waterMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16
   behaviour: {fileID: 11400000, guid: 980f3461988d4c143a9ff79268ccf180, type: 2}
-  startingCount: 100
+  startingCount: 50
   driveFactor: 10
   maxSpeed: 5
-  neighborRadius: 1.5
+  neighborRadius: 2
   avoidanceRadiusMultiplier: 0.5
   flockSliderSpawn: {fileID: 1205984395}
 --- !u!1001 &1693498412
@@ -152202,14 +152202,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 1910467579894989641, guid: 3c3a46c959c31424faa5ef25fe972fcf, type: 3}
   agents: []
-  flockMask:
+  waterMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 16
   behaviour: {fileID: 11400000, guid: 980f3461988d4c143a9ff79268ccf180, type: 2}
-  startingCount: 100
+  startingCount: 50
   driveFactor: 10
   maxSpeed: 5
-  neighborRadius: 1.5
+  neighborRadius: 2
   avoidanceRadiusMultiplier: 0.5
   flockSliderSpawn: {fileID: 1140064060}
 --- !u!4 &2027949906

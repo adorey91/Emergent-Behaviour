@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a150b143521c9419183aec49a49a55, type: 3}
   m_Name: Stay In Camera Bounds
   m_EditorClassIdentifier: 
-  boundaryBuffer: 5
+  boundaryBuffer: 4

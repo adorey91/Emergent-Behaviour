@@ -6,7 +6,7 @@ public class Flock : MonoBehaviour
 {
     public FlockAgent agentPrefab;
     public List<FlockAgent> agents = new List<FlockAgent>();
-    public LayerMask flockMask;
+    public LayerMask waterMask;
     public FlockBehaviour behaviour;
     private int minSpawn = 0;
     private int maxSpawn = 100;
@@ -62,7 +62,10 @@ public class Flock : MonoBehaviour
     private List<Transform> GetNearbyObjects(FlockAgent agent)
     {
         List<Transform> context = new List<Transform>();
-        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius, flockMask);
+        // New Line
+        //Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius, flockMask);
+        // Old Line
+        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius, ~waterMask);
         startingCount = (int)flockSliderSpawn.value;
         foreach (Collider2D c in contextColliders)
         {
@@ -71,6 +74,7 @@ public class Flock : MonoBehaviour
         }
         return context;
     }
+
 
 
 

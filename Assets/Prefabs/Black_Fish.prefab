@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.11320752
       objectReference: {fileID: 0}
+    - target: {fileID: 1014711056443862355, guid: 6a1552984600dff469ed256842bfc675, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 2612562727005048702, guid: 6a1552984600dff469ed256842bfc675, type: 3}
       propertyPath: m_Name
       value: Black_Fish

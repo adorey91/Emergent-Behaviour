@@ -12,7 +12,7 @@ public class PhysicsLayerFilter : ContextFilter
         List<Transform> filtered = new List<Transform>();
         foreach (Transform item in original)
         {
-            if(mask == (mask | (1 << item.gameObject.layer)))
+            if ((mask.value & (1 << item.gameObject.layer)) != 0)
                 filtered.Add(item);
         }
         return filtered;
