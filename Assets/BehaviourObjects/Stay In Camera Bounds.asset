@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8740f8088df60ed499e8f05a552f8ae5, type: 3}
-  m_Name: Stay In R20
+  m_Script: {fileID: 11500000, guid: 00a150b143521c9419183aec49a49a55, type: 3}
+  m_Name: Stay In Camera Bounds
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0}
-  radius: 35
+  boundaryBuffer: 5

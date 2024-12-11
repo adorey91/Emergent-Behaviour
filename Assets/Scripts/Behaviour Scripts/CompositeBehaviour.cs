@@ -11,17 +11,17 @@ public class CompositeBehaviour : FlockBehaviour
 
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
-        //handle data mismatch
+        // handle data mismatch
         if (weights.Length != behaviours.Length)
         {
             Debug.LogError("Data mismatch in " + name, this);
             return Vector2.zero;
         }
 
-        //set up move
+        // set up move
         Vector2 move = Vector2.zero;
 
-        //iterate through behaviours
+        // iterate through behaviours
         for (int i = 0; i < behaviours.Length; i++)
         {
             Vector2 partialMove = behaviours[i].CalculateMove(agent, context, flock) * weights[i];

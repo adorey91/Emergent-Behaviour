@@ -1,21 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Flock : MonoBehaviour
 {
-    public FlockAgent fishPrefab;
-    public List<FlockAgent> allFish = new List<FlockAgent>();
+    public FlockAgent agentPrefab;
+    public List<FlockAgent> agents = new List<FlockAgent>();
+    public LayerMask flockMask;
     public FlockBehaviour behaviour;
-    private int minSpawn = 10;
+    private int minSpawn = 0;
     private int maxSpawn = 100;
-    [Range(10, 100)] public int startingCount = 50;
-    private const float fishDensity = 0.03f;
+    [Range(10, 500)] public int startingCount = 250;
+    private const float agentDensity = 0.08f;
 
     [Range(1f, 100f)] public float driveFactor = 10f;
-    [Range(1f, 100f)] public float maxSpeed = 5f;
+    [Range(1f, 10f)] public float maxSpeed = 5f;
     [Range(1f, 10f)] public float neighborRadius = 1.5f;
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
@@ -24,10 +23,6 @@ public class Flock : MonoBehaviour
     private float squareAvoidanceRadius;
 
     [SerializeField] private Slider flockSliderSpawn;
-    [SerializeField] private AudioSource sfxSource;
-    [SerializeField] private AudioClip sfxSplash;
-    [SerializeField] private AudioClip sfxYoink;
-
 
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
 
@@ -36,22 +31,27 @@ public class Flock : MonoBehaviour
         flockSliderSpawn.maxValue = maxSpawn;
         flockSliderSpawn.minValue = minSpawn;
         flockSliderSpawn.value = startingCount;
-        Debug.Log(this.name + ", " + flockSliderSpawn.value);
+        //Debug.Log(this.name + ", " + flockSliderSpawn.value);
+
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
-
 
         SpawnFish(startingCount);
     }
 
     private void Update()
     {
-        foreach (FlockAgent agent in allFish)
+        foreach (FlockAgent agent in agents)
         {
             List<Transform> context = GetNearbyObjects(agent);
+
+            //FOR DEMO ONLY
+            //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+
             Vector2 move = behaviour.CalculateMove(agent, context, this);
             move *= driveFactor;
+
             if (move.sqrMagnitude > squareMaxSpeed)
                 move = move.normalized * maxSpeed;
 
@@ -62,7 +62,7 @@ public class Flock : MonoBehaviour
     private List<Transform> GetNearbyObjects(FlockAgent agent)
     {
         List<Transform> context = new List<Transform>();
-        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius);
+        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius, flockMask);
         startingCount = (int)flockSliderSpawn.value;
         foreach (Collider2D c in contextColliders)
         {
@@ -76,41 +76,40 @@ public class Flock : MonoBehaviour
 
     public void SpawnFish(int count)
     {
-        int currentCount = allFish.Count;
+        int currentCount = agents.Count;
         for (int i = 0; i < count; i++)
         {
             FlockAgent newFish = Instantiate(
-                fishPrefab,
-                Random.insideUnitCircle * startingCount * fishDensity,
+                agentPrefab,
+                Random.insideUnitCircle * startingCount * agentDensity,
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform
                 );
             
-            newFish.name = "Fish " + currentCount + i;
+            newFish.name = agentPrefab.name + currentCount + i;
             newFish.Initialize(this);
-            allFish.Add(newFish);
+            agents.Add(newFish);
         }
     }
 
     public void UpdateFishCount(int newCount)
     {
-
-        // If we need to add more fish
-        if (newCount > allFish.Count)
+        // If we need to add more agents
+        if (newCount > agents.Count)
         {
-            sfxSource.PlayOneShot(sfxSplash);
-            int fishToSpawn = newCount - allFish.Count;
+            Actions.OnPlaySFX?.Invoke("AddFish");
+            int fishToSpawn = newCount - agents.Count;
             SpawnFish(fishToSpawn);
         }
-        // If we need to remove fish
-        else if (newCount < allFish.Count)
+        // If we need to remove agents
+        else if (newCount < agents.Count)
         {
-            sfxSource.PlayOneShot(sfxYoink);
-            int fishToRemove = allFish.Count - newCount;
+            Actions.OnPlaySFX?.Invoke("RemoveFish");
+            int fishToRemove = agents.Count - newCount;
             for (int i = 0; i < fishToRemove; i++)
             {
-                FlockAgent agentToRemove = allFish[allFish.Count - 1]; // Remove from the end
-                allFish.Remove(agentToRemove);
+                FlockAgent agentToRemove = agents[agents.Count - 1]; // Remove from the end
+                agents.Remove(agentToRemove);
                 Destroy(agentToRemove.gameObject);
             }
         }

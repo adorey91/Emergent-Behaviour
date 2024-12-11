@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class UserInput : MonoBehaviour
 {
     [SerializeField] Tile tileScript;
-    [SerializeField] Block blockScript;
     [SerializeField] Menu pauseMenu;
+
+    [SerializeField] LayerMask tileLayerMask;
+    RaycastHit2D hitTile;
+
 
     private void Start()
     {
@@ -22,11 +26,15 @@ public class UserInput : MonoBehaviour
     {
         if (context.performed)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(EventSystem.current.IsPointerOverGameObject())
+            {
+                Debug.Log("UI is blocking the raycast");
+                return;
+            }
 
-            // Perform the raycast and check if it hits something
-            RaycastHit2D hitTile = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hitTile.collider.tag == "Land" || hitTile.collider.tag == "Water")
+            // Perform the raycast and check if it hits something in the specified LayerMask
+            RaycastHit2D hitTile = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, tileLayerMask);
+            if (hitTile.collider != null)
             {
                 tileScript = hitTile.collider.gameObject.GetComponent<Tile>();
                 tileScript.SetTileType();

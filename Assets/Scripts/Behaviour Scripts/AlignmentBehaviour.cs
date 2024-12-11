@@ -7,7 +7,8 @@ public class AlignmentBehaviour : FilteredFlockBehaviour
 {
     public override Vector2 CalculateMove(FlockAgent fish, List<Transform> context, Flock flock)
     {
-        if (context.Count == 0) // if no neighbors, maintain current alignment
+        // if no neighbors, maintain current alignment
+        if (context.Count == 0) 
             return fish.transform.up;
 
         // add all points together and average
